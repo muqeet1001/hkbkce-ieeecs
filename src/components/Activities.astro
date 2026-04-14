@@ -1,0 +1,116 @@
+---
+---
+<section
+  class="activities-section activities-container"
+  style="padding: 9rem 4rem; background-color: var(--color-bg); position: relative; z-index: 20;"
+>
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="about-grid-2 act-fade">
+      
+      {/* Left Side (Matching About Mission Layout) */}
+      <div class="about-mission">
+        <div class="section-label" style="color: var(--color-bg); opacity: 0.4;">Our Expertise</div>
+        <h3 style="font-family: Anton, sans-serif; font-size: 2.2rem; text-transform: uppercase; line-height: 1; color: var(--color-bg); margin-bottom: 1.5rem;">
+          TECHNICAL EXCELLENCE
+        </h3>
+        <p style="font-size: 14px; line-height: 1.8; opacity: 0.65; color: var(--color-bg); margin-bottom: 1.75rem;">
+          We provide platforms for students to explore emerging technologies through collaborative learning, hands-on workshops, and deep technical immersion.
+        </p>
+        <div style="display: flex; gap: 10px; margin-bottom: 0.6rem; font-size: 13px; line-height: 1.5; color: var(--color-bg); opacity: 0.65;">
+          <span style="color: var(--color-accent); flex-shrink: 0;">&rarr;</span>
+          <span>Hands-on Technical Workshops</span>
+        </div>
+        <div style="display: flex; gap: 10px; margin-bottom: 0.6rem; font-size: 13px; line-height: 1.5; color: var(--color-bg); opacity: 0.65;">
+          <span style="color: var(--color-accent); flex-shrink: 0;">&rarr;</span>
+          <span>Innovative Project Development</span>
+        </div>
+        <div style="display: flex; gap: 10px; margin-bottom: 0.6rem; font-size: 13px; line-height: 1.5; color: var(--color-bg); opacity: 0.65;">
+          <span style="color: var(--color-accent); flex-shrink: 0;">&rarr;</span>
+          <span>Advanced Coding Bootcamps</span>
+        </div>
+        <div style="display: flex; gap: 10px; margin-bottom: 0.6rem; font-size: 13px; line-height: 1.5; color: var(--color-bg); opacity: 0.65;">
+          <span style="color: var(--color-accent); flex-shrink: 0;">&rarr;</span>
+          <span>Industry Certification Support</span>
+        </div>
+      </div>
+
+      {/* Right Side (Matching About Vision Layout) */}
+      <div class="about-vision">
+        <div class="about-vision-card" style="background-color: var(--color-green);">
+          <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: white; opacity: 0.65; margin-bottom: 0.75rem;">Innovation</div>
+          <h3 style="font-family: Anton, sans-serif; font-size: 1.8rem; text-transform: uppercase; line-height: 1; color: white; margin-bottom: 1rem;">INNOVATION & STARTUPS</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: white; opacity: 0.9;">
+              <span style="font-weight: 800;">&rarr;</span>
+              <span>Startup idea discussions</span>
+            </div>
+            <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: white; opacity: 0.9;">
+              <span style="font-weight: 800;">&rarr;</span>
+              <span>MVP building support</span>
+            </div>
+            <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: white; opacity: 0.9;">
+              <span style="font-weight: 800;">&rarr;</span>
+              <span>Hackathon preparation</span>
+            </div>
+            <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: white; opacity: 0.9;">
+              <span style="font-weight: 800;">&rarr;</span>
+              <span>Entrepreneurship guidance</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-vision-card" style="background-color: var(--color-accent);">
+          <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: white; opacity: 0.65; margin-bottom: 0.75rem;">Community</div>
+          <h3 style="font-family: Anton, sans-serif; font-size: 1.8rem; text-transform: uppercase; line-height: 1; color: white; margin-bottom: 1rem;">COMMUNITY & COLLABORATION</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: white; opacity: 0.9;">
+              <span style="font-weight: 800;">&rarr;</span>
+              <span>Peer-to-peer learning</span>
+            </div>
+            <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: white; opacity: 0.9;">
+              <span style="font-weight: 800;">&rarr;</span>
+              <span>Team-based projects</span>
+            </div>
+            <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: white; opacity: 0.9;">
+              <span style="font-weight: 800;">&rarr;</span>
+              <span>Mentorship programs</span>
+            </div>
+            <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: white; opacity: 0.9;">
+              <span style="font-weight: 800;">&rarr;</span>
+              <span>Tech community events</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.initActivities = function(container = document) {
+    if (!container) return;
+    const containers = container.querySelectorAll('.activities-container');
+    containers.forEach(c => {
+      gsap.fromTo(
+        c.querySelectorAll('.act-fade'),
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: c,
+            start: 'top 75%',
+          },
+        }
+      );
+    });
+  }
+</script>

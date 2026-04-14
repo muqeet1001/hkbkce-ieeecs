@@ -1,0 +1,98 @@
+---
+import { executiveCommittee, facultyAdvisors } from '../data/teamData.js';
+---
+
+<div class="team-container">
+  {/* Executive Committee */}
+  <section id="team" class="team-section">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="margin-bottom: 5rem;">
+        <div class="section-label" style="color: var(--color-bg); opacity: 0.35;">The People</div>
+        <h2 class="section-title section-title-light">MEET THE<br />TEAM</h2>
+        <p style="margin-top: 1.25rem; max-width: 480px; font-size: 1rem; line-height: 1.7; opacity: 0.5; font-weight: 500;">
+          The passionate individuals driving IEEE CS HKBK forward.
+        </p>
+      </div>
+
+      <div class="team-grid-3">
+        {executiveCommittee.slice(0, 3).map(member => (
+          <div class="team-card tm-fade">
+            <img src={member.image} alt={member.name} class="team-photo" onerror="this.style.display='none'" />
+            <div>
+              <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--color-accent); font-weight: 700; margin-bottom: 0.3rem;">{member.role}</div>
+              <div style="font-weight: 700; font-size: 17px; color: var(--color-bg); margin-bottom: 0.6rem;">{member.name}</div>
+              <p style="font-size: 13px; line-height: 1.7; opacity: 0.45; color: var(--color-bg); margin-bottom: 1rem;">{member.description}</p>
+              {member.linkedin ? (
+                <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
+                  style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: var(--color-bg); opacity: 0.4; border-bottom: 1px solid rgba(241,239,235,0.25); padding-bottom: 2px; transition: opacity 0.2s;"
+                  onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=0.4"
+                >LinkedIn &nearr;</a>
+              ) : ''}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="team-grid-2">
+        {executiveCommittee.slice(3).map(member => (
+          <div class="team-card tm-fade">
+            <img src={member.image} alt={member.name} class="team-photo" onerror="this.style.display='none'" />
+            <div>
+              <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--color-accent); font-weight: 700; margin-bottom: 0.3rem;">{member.role}</div>
+              <div style="font-weight: 700; font-size: 17px; color: var(--color-bg); margin-bottom: 0.6rem;">{member.name}</div>
+              <p style="font-size: 13px; line-height: 1.7; opacity: 0.45; color: var(--color-bg); margin-bottom: 1rem;">{member.description}</p>
+              {member.linkedin ? (
+                <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
+                  style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: var(--color-bg); opacity: 0.4; border-bottom: 1px solid rgba(241,239,235,0.25); padding-bottom: 2px; transition: opacity 0.2s;"
+                  onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=0.4"
+                >LinkedIn &nearr;</a>
+              ) : ''}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Faculty Advisors */}
+  <section class="team-section" style="background-color: #111;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div class="section-label" style="color: var(--color-bg); opacity: 0.35; margin-bottom: 1rem;">Faculty</div>
+      <h3 class="section-title section-title-light" style="font-size: clamp(2rem, 4vw, 4rem); margin-bottom: 2.5rem;">ADVISORS</h3>
+      <div class="faculty-grid">
+        {facultyAdvisors.map(m => (
+          <div class="faculty-card fac-fade">
+            {m.image ? (
+              <img src={m.image} alt={m.name} class="team-photo" style="margin-bottom: 1.25rem;" />
+            ) : (
+              <div style="width: 52px; height: 52px; border-radius: 50%; background-color: rgba(241,239,235,0.08); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 22px;">👨‍🏫</div>
+            )}
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--color-accent); font-weight: 700; margin-bottom: 0.4rem;">{m.role}</div>
+            <div style="font-weight: 700; font-size: 16px; color: var(--color-bg); margin-bottom: 0.75rem;">{m.name}</div>
+            <p style="font-size: 13px; line-height: 1.7; opacity: 0.45; color: var(--color-bg);">{m.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.initTeam = function(container = document) {
+    if (!container) return;
+    const containers = container.querySelectorAll('.team-container');
+    containers.forEach(c => {
+      const teamGrid = c.querySelector('.team-grid-3');
+      if (teamGrid) {
+        gsap.fromTo(c.querySelectorAll('.tm-fade'), { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: teamGrid, start: 'top 78%' } });
+      }
+      const facultyGrid = c.querySelector('.faculty-grid');
+      if (facultyGrid) {
+        gsap.fromTo(c.querySelectorAll('.fac-fade'), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: facultyGrid, start: 'top 80%' } });
+      }
+    });
+  }
+</script>

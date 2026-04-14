@@ -1,0 +1,97 @@
+---
+import { events } from '../data/eventsData.js';
+---
+
+<div id="events" class="events-container" style="position: relative; overflow: hidden; background-color: var(--color-bg);">
+  {events.map((event, i) => (
+    <section
+      class="event-panel stack-section"
+      style={`height: 100vh; width: 100vw; background-color: ${event.color}; color: ${event.textColor}; position: relative; display: flex; align-items: center; justify-content: center; z-index: ${i}; box-shadow: 0 -20px 60px rgba(0,0,0,0.15); overflow: hidden;`}
+    >
+      {/* Content Wrapper */}
+      {!event.website ? (
+        <div style="position: absolute; inset: 0; padding: 4rem; display: flex; flex-direction: column; justify-content: space-between; z-index: 2;">
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <span class="text-display" style="font-size: 5rem; opacity: 0.2;">{event.id}</span>
+            <div style="text-align: right;">
+              <span style="display: block; font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 0.2em;">{event.category}</span>
+              <span style={`display: inline-block; font-size: 10px; margin-top: 0.8rem; padding: 4px 12px; border-radius: 20px; border: 1px solid ${event.textColor}44; font-weight: 700;`}>
+                {event.status === 'upcoming' ? 'UPCOMING' : 'COMPLETED'}
+              </span>
+            </div>
+          </div>
+
+          <a
+            href={`/events/${event.slug}`}
+            class="interactive"
+            style={`align-self: flex-end; background-color: ${event.textColor}; color: ${event.color}; padding: 1.2rem 2.8rem; border-radius: 50px; text-transform: uppercase; font-weight: 700; font-size: 13px; letter-spacing: 0.1em; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.1);`}
+          >
+            View Details
+          </a>
+        </div>
+      ) : ''}
+
+      {/* Media/Website Preview Container */}
+      <a
+        href={event.website || `/events/${event.slug}`}
+        class="interactive"
+        target={event.website ? "_blank" : "_self"}
+        style="width: 65%; height: 65%; max-height: 600px; overflow: hidden; border-radius: 24px; box-shadow: 0 30px 80px rgba(0,0,0,0.25); cursor: pointer; background-color: #111; position: relative; z-index: 1; transform: translateY(-2%); display: block;"
+      >
+        {event.website ? (
+          <div style="width: 100%; height: 100%; position: relative;">
+            <iframe
+              src={event.website}
+              title={event.title}
+              style="width: 200%; height: 200%; border: none; transform: scale(0.5); transform-origin: top left; pointer-events: none;"
+            ></iframe>
+            <div style="position: absolute; inset: 0; z-index: 10;"></div>
+          </div>
+        ) : event.poster ? (
+          <img src={event.poster} alt={event.title} style="width: 100%; height: 100%; object-fit: cover;" />
+        ) : (
+          <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">
+            <span class="text-display" style="font-size: 2.5rem; text-align: center;">{event.title}</span>
+          </div>
+        )}
+      </a>
+    </section>
+  ))}
+</div>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.initEvents = function(container = document) {
+    if (!container) return;
+    const containers = container.querySelectorAll('.events-container');
+    containers.forEach(c => {
+      const sections = gsap.utils.toArray('.stack-section', c);
+      sections.forEach((section, i) => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          pin: true,
+          pinSpacing: false,
+          snap: 1,
+        });
+
+        if (i < sections.length - 1) {
+          gsap.to(section, {
+            scale: 0.94,
+            opacity: 0.4,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: sections[i + 1],
+              start: 'top bottom',
+              end: 'top top',
+              scrub: true,
+            }
+          });
+        }
+      });
+    });
+  }
+</script>

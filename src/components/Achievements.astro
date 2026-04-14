@@ -1,0 +1,87 @@
+---
+// Only confirmed, real milestones — no placeholder data
+const milestones = [
+  {
+    id: '01', year: '2026', title: 'Chapter Founded',
+    category: 'Milestone', color: 'var(--color-accent)', textColor: '#0e0e0e',
+    desc: 'IEEE Computer Society Student Chapter officially established at HKBK College of Engineering, Nagawara, Bengaluru — the beginning of our journey to advance technology for humanity.',
+  },
+  {
+    id: '02', year: '2026', title: 'AI Ignite Hackathon',
+    category: 'Event', color: '#1a1a2e', textColor: '#f1efeb',
+    desc: 'Flagship 48-hour AI Hackathon successfully hosted at CSE Seminar Hall, April 15–16. Student innovators from across Bengaluru built AI-powered solutions addressing real-world challenges.',
+  },
+  {
+    id: '03', year: '2026', title: 'Oracle Innovation Center',
+    category: 'Inauguration', color: 'var(--color-green)', textColor: '#f1efeb',
+    desc: 'Inauguration of the Oracle Innovation Center at HKBK — marking a new era of technology-focused education and hands-on learning for the student community.',
+  },
+  {
+    id: '04', year: '2026', title: '50+ Active Members',
+    category: 'Growth', color: 'var(--color-pink)', textColor: '#f1efeb',
+    desc: 'Reached 50+ active student members within the inaugural year, building a thriving community of tech enthusiasts and innovators at HKBK.',
+  },
+];
+
+const stats = [['2026','Founded'],['50+','Members'],['1','Hackathon Hosted'],['4','Milestones']];
+---
+
+<section id="achievements" class="ach-section ach-container">
+  <div style="max-width:1200px; margin:0 auto;">
+
+    {/* header */}
+    <div style="margin-bottom:5rem;">
+      <div class="section-label">Our Journey</div>
+      <h2 class="section-title">ACHIEVE-<br/>MENTS</h2>
+    </div>
+
+    {/* stats */}
+    <div class="ach-stats">
+      {stats.map(([v,l])=>(
+        <div class="ach-stat-box">
+          <div style="font-family:Anton,sans-serif; font-size:3rem; line-height:1; margin-bottom:0.4rem;">{v}</div>
+          <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; opacity:0.45; font-weight:600;">{l}</div>
+        </div>
+      ))}
+    </div>
+
+    {/* milestone rows */}
+    <div class="ach-list">
+      {milestones.map(m=>(
+        <div class="ach-row">
+          <span style="font-family:Anton,sans-serif; font-size:3rem; opacity:0.18; line-height:1;">{m.id}</span>
+          <div>
+            <div style="display:flex; gap:8px; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap;">
+              <span style={`font-size:10px; text-transform:uppercase; letter-spacing:2px; font-weight:700; background-color:${m.color}; color:${m.textColor}; padding:3px 10px; border-radius:50px;`}>{m.category}</span>
+              <span style="font-size:11px; opacity:0.4; font-weight:600;">{m.year}</span>
+            </div>
+            <div style="font-family:Anton,sans-serif; font-size:clamp(1.4rem,2.5vw,2rem); text-transform:uppercase; line-height:1.1;">{m.title}</div>
+          </div>
+          <p style="font-size:13px; line-height:1.8; opacity:0.55;">{m.desc}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.initAchievements = function(container = document) {
+    if (!container) return;
+    const containers = container.querySelectorAll('.ach-container');
+    containers.forEach(c => {
+      const achStats = c.querySelector('.ach-stats');
+      if (achStats) {
+        gsap.fromTo(c.querySelectorAll('.ach-stat-box'), { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: achStats, start: 'top 80%' } });
+      }
+      const achList = c.querySelector('.ach-list');
+      if (achList) {
+        gsap.fromTo(c.querySelectorAll('.ach-row'), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.75, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: achList, start: 'top 75%' } });
+      }
+    });
+  }
+</script>

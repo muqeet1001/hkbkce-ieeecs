@@ -1,0 +1,61 @@
+---
+const text = "IEEE CS";
+---
+<div
+  id="preloader-container"
+  style="position: fixed; inset: 0; background-color: #0e0e0e; color: #f1efeb; z-index: 99999; display: flex; align-items: center; justify-content: center;"
+>
+  <div style="display: flex; overflow: hidden;">
+    {text.split('').map((char) => (
+      <span
+        class="loader-letter text-display"
+        style="font-size: clamp(5rem, 15vw, 12rem); line-height: 1;"
+      >
+        {char === ' ' ? <Fragment set:html="&nbsp;" /> : char}
+      </span>
+    ))}
+  </div>
+</div>
+
+<script>
+  import gsap from 'gsap';
+
+  function initPreloader() {
+    const container = document.getElementById('preloader-container');
+    if (!container) return;
+
+    const letters = container.querySelectorAll('.loader-letter');
+    document.body.style.overflow = 'hidden';
+
+    // Only show preloader on first visit per session
+    if (sessionStorage.getItem('preloader_shown')) {
+      container.style.display = 'none';
+      document.body.style.overflow = '';
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        container.style.display = 'none';
+        document.body.style.overflow = '';
+        sessionStorage.setItem('preloader_shown', 'true');
+      }
+    });
+
+    tl.to(letters, {
+      y: '-100%',
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power3.inOut',
+      delay: 0.5
+    })
+      .to(container, {
+        y: '-100%',
+        duration: 0.8,
+        ease: 'power4.inOut'
+      }, "-=0.3");
+  }
+
+  initPreloader();
+</script>

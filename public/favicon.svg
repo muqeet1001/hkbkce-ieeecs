@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>IEEE CSHKBK Favicon</title>
+  <rect width="64" height="64" rx="16" fill="#0e0e0e"/>
+  <rect x="8" y="8" width="48" height="48" rx="12" fill="#f1efeb"/>
+  <path d="M24 18h16v4H28v7h10v4H28v9h12v4H24z" fill="#0e0e0e"/>
+  <path d="M43 18h4v28h-4z" fill="#e49366"/>
+</svg>

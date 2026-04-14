@@ -1,0 +1,85 @@
+---
+---
+<!-- Custom Cursor - only shows on nav hover -->
+<div id="custom-cursor" class="custom-cursor" style="display: none;">
+  <div id="custom-cursor-dot" class="custom-cursor-dot">
+    <span id="custom-cursor-text">Go</span>
+  </div>
+</div>
+
+<style>
+  .custom-cursor {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  .custom-cursor-dot {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(228, 147, 102, 0.95);
+    color: #f1efeb;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition:
+      transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 0.2s ease;
+  }
+  .custom-cursor-dot.is-active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  .custom-cursor-dot span {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+</style>
+
+<script>
+  function initCursor() {
+    const cursor = document.getElementById('custom-cursor');
+    const dot = document.getElementById('custom-cursor-dot');
+    if (!cursor || !dot) return;
+
+    // Only on devices with a fine pointer (desktop)
+    const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    if (!mediaQuery.matches) return;
+
+    cursor.style.display = 'block';
+
+    // Track mouse position always
+    window.addEventListener('pointermove', (e) => {
+      dot.style.left = `${e.clientX}px`;
+      dot.style.top = `${e.clientY}px`;
+    });
+
+    // Only activate on nav links
+    const NAV_SELECTOR = '.nav__link';
+
+    document.addEventListener('mouseover', (e) => {
+      const target = (e.target as HTMLElement).closest(NAV_SELECTOR);
+      if (target) {
+        dot.classList.add('is-active');
+        (target as HTMLElement).style.cursor = 'none';
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      const target = (e.target as HTMLElement).closest(NAV_SELECTOR);
+      if (target) {
+        dot.classList.remove('is-active');
+        (target as HTMLElement).style.cursor = '';
+      }
+    });
+  }
+
+  initCursor();
+</script>

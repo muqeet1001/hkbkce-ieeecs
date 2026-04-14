@@ -1,0 +1,68 @@
+---
+import "../styles/app.css";
+import "../styles/ieee.css";
+import Frame from "../components/frame.astro";
+import Nav from "../components/nav.astro";
+import TransitionSvgWrapper from "../components/TransitionSvgWrapper.astro";
+import TransitionOverlay from "../components/TransitionOverlay.astro";
+import TransitionMorphSvg from "../components/TransitionMorphSvg.astro";
+import Cursor from "../components/Cursor.astro";
+const { uid } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>IEEE CS HKBKCE | Computer Society</title>
+    <link rel="icon" type="image/jpeg" href="/logo.jpeg" />
+    <link rel="shortcut icon" href="/logo.jpeg" />
+  </head>
+  <body data-barba="wrapper">
+    <Frame />
+    <div data-barba="container" data-barba-namespace={uid} class="app__wrapper">
+      <main class="content__wrapper">
+        <slot />
+      </main>
+    </div>
+    <Nav />
+    <svg class="hidden">
+      <defs>
+        <filter
+          id="container-glass"
+          x="0%"
+          y="0%"
+          width="100%"
+          height="100%"
+          colorInterpolationFilters="sRGB"
+        >
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.05 0.05"
+            numOctaves="1"
+            seed="1"
+            result="turbulence"
+          />
+          <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise" />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="blurredNoise"
+            scale="70"
+            xChannelSelector="R"
+            yChannelSelector="B"
+            result="displaced"
+          />
+          <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur" />
+          <feComposite in="finalBlur" in2="finalBlur" operator="over" />
+        </filter>
+      </defs>
+    </svg>
+    <TransitionSvgWrapper />
+    <TransitionOverlay />
+    <TransitionMorphSvg />
+    <Cursor />
+    <script src="../scripts/app.js"></script>
+  </body>
+</html>
