@@ -470,3 +470,16 @@ html,
     opacity: 0.4 !important;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .nav {
+    width: 90%;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    justify-content: space-around;
+  }
+  .nav__link {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
