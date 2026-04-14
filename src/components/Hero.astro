@@ -10,6 +10,9 @@
         <div style="font-size: 10px; letter-spacing: 3px; opacity: 0.5; font-weight: 600; text-transform: uppercase;">HKBKCE</div>
       </div>
     </div>
+    <div class="hero-nav-actions">
+      <a href="/events" class="btn-primary" style="padding: 10px 24px;">Explore</a>
+    </div>
   </header>
 
   {/* Centre */}
@@ -21,6 +24,10 @@
     <p class="hero-tagline">
       Advancing Technology For Humanity &mdash;<br class="br-desktop" /> building the next generation of innovators at HKBK.
     </p>
+    <div class="hero-ctas">
+      <a href="/events" class="btn-primary">Explore Events</a>
+      <a href="/about" class="btn-outline">About Us</a>
+    </div>
   </div>
 
   {/* Stats bar */}
@@ -68,7 +75,8 @@
         title.appendChild(span);
       });
       title.dataset.initialized = "true";
-
+ctas'), { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 1.5 });
+        gsap.fromTo(c.querySelectorAll('.hero-
       const ctx = gsap.context(() => {
         gsap.to(c.querySelectorAll('.split-char'), { y: '0%', opacity: 1, duration: 1.2, stagger: 0.04, ease: 'power4.out', delay: 0.6 });
         gsap.fromTo(c.querySelectorAll('.hero-tagline'), { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 1.3 });
