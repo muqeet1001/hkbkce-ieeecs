@@ -569,6 +569,7 @@ a, button { text-decoration: none; font-family: inherit; color: inherit; }
     cursor: pointer;
   }
   .hero-eyebrow    { font-size: 9px; letter-spacing: 2px; }
+  .hero-title      { white-space: nowrap; font-size: clamp(2.8rem, 13vw, 4.8rem); }
   .hero-tagline    { font-size: 0.9rem; }
   .br-desktop      { display: none; }
   .hero-ctas       { flex-direction: column; width: 100%; max-width: 300px; }
@@ -655,11 +656,4 @@ a, button { text-decoration: none; font-family: inherit; color: inherit; }
   .footer-grid      { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 768px) {
-  .hero-title .mobile-break {
-    display: block !important;
-    height: 0;
-    width: 100%;
-  }
-}
 
